@@ -1,5 +1,5 @@
 import classes from './Navbar.module.css'
-
+import CartWidget from '../CartWidget/CartWidget'
 
 const Navbar = () => {
     return (
@@ -10,7 +10,7 @@ const Navbar = () => {
                 <div className='w-1/3 flex justify-center'><a className='tracking-[.3rem]' href="">MUNICIONES</a></div>
                 <div className='w-1/3 flex justify-center'><a className='tracking-[.3rem]' href="">BLINDAJE</a></div>    
             </nav>
-            <img src="otra img" alt="" />
+            <CartWidget />
         </header>
     )
 }
