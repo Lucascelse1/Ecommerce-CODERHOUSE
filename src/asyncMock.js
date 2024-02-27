@@ -4,7 +4,7 @@ const products = [
         name: 'Glock',
         price: 25000,
         category: 'Pistola',
-        img: 'url',
+        img: 'https://media.istockphoto.com/id/1180387778/es/foto/imagen-aislada-de-una-pistola-glock-17-sobre-fondo-blanco.jpg?s=1024x1024&w=is&k=20&c=F65UkdvwDwkU2AMZ2hJR0Y0XKDkqQHmSftpOoYEfMdo=',
         stock: 20,
         description: 'Descripcion del arma'
     },

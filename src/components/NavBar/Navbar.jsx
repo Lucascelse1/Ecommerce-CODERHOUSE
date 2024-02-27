@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <header className={classes.header}>
             <img src="" alt="" />
-            <nav className="bg-[#51616d] w-2/4 p-2 flex justify-around my-2 rounded-lg divide-x text-white">
+            <nav className="bg-[#51616d] w-9/12 md:w-2/4 p-2 flex justify-around my-2 rounded-lg md:divide-x text-white">
                 <div className='w-1/3 flex justify-center'><a className='tracking-[.3rem]' href="">ARMAS</a></div>
                 <div className='w-1/3 flex justify-center'><a className='tracking-[.3rem]' href="">MUNICIONES</a></div>
                 <div className='w-1/3 flex justify-center'><a className='tracking-[.3rem]' href="">BLINDAJE</a></div>    
