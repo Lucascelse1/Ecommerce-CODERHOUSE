@@ -4,7 +4,7 @@ const products = [
         name: 'Glock',
         price: 25000,
         category: 'Pistola',
-        img: 'https://media.istockphoto.com/id/1180387778/es/foto/imagen-aislada-de-una-pistola-glock-17-sobre-fondo-blanco.jpg?s=1024x1024&w=is&k=20&c=F65UkdvwDwkU2AMZ2hJR0Y0XKDkqQHmSftpOoYEfMdo=',
+        img: 'https://armeriavitacura.cl/wp-content/uploads/2022/04/X_glock17gen39870.jpg',
         stock: 20,
         description: 'Descripcion del arma'
     },
@@ -13,7 +13,7 @@ const products = [
         name: 'USP',
         price: 35000,
         category: 'Pistola',
-        img: 'url',
+        img: 'https://gunfire.com/data/gfx/pictures/medium/5/3/1152207635_1.webp',
         stock: 15,
         description: 'Descripcion del arma'
     },
@@ -22,16 +22,79 @@ const products = [
         name: 'Dessert Eagle',
         price: 40000,
         category: 'Revolver',
+        img: 'https://www.triestina.com.ar/wp-content/uploads/2018/02/2-mrde357srmb_1.jpg',
+        stock: 40,
+        description: 'Descripcion del arma'
+    },
+    {
+        id: '4',
+        name: 'Porongol',
+        price: 60000,
+        category: 'Revolver',
         img: 'url',
         stock: 40,
         description: 'Descripcion del arma'
-    }
+    },
+    {
+        id: '4',
+        name: 'Porongol',
+        price: 60000,
+        category: 'Revolver',
+        img: 'url',
+        stock: 40,
+        description: 'Descripcion del arma'
+    },
+    {
+        id: '4',
+        name: 'Porongol',
+        price: 60000,
+        category: 'Revolver',
+        img: 'url',
+        stock: 40,
+        description: 'Descripcion del arma'
+    },
+    {
+        id: '4',
+        name: 'Porongol',
+        price: 60000,
+        category: 'Revolver',
+        img: 'url',
+        stock: 40,
+        description: 'Descripcion del arma'
+    },
+    {
+        id: '4',
+        name: 'Porongol',
+        price: 60000,
+        category: 'Revolver',
+        img: 'url',
+        stock: 40,
+        description: 'Descripcion del arma'
+    },
+    {
+        id: '4',
+        name: 'Porongol',
+        price: 60000,
+        category: 'Revolver',
+        img: 'url',
+        stock: 40,
+        description: 'Descripcion del arma'
+    },
+    {
+        id: '4',
+        name: 'Porongol',
+        price: 60000,
+        category: 'Revolver',
+        img: 'url',
+        stock: 40,
+        description: 'Descripcion del arma'
+    },
 
 ]
 
 export const getProducts = () => {
     return new Promise((resolve) => {
-        setTimeout(()=>{
+        setTimeout( () => {
             resolve(products)
         }, 500)
     })
