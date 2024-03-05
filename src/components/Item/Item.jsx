@@ -1,5 +1,3 @@
-
-
 const Item = ({name, img, price}) => {
     return (
         <div className="text-white">
