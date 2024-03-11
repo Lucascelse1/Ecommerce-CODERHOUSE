@@ -2,9 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Protest+Guerrilla&family=Sacramento&display=swap');
 
 .header {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     font-family: "Protest Guerrilla", sans-serif;
 }
