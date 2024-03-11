@@ -52,7 +52,7 @@ const products = [
         category: 'Fusiles',
         img: 'https://www.armeriacanigo.com.ar/wp-content/uploads/11652_1.jpg.webp',
         stock: 20,
-        description: 'El Sig Sauer Cross, calibre 308, es un fusil apto para la caza sumamente confiable y con un excelente nivel de precisión. Se trata de un rifle ligero y modular, capaz de adaptarse a cualquier usuario, preferencia y situación. El Sig Sauer Cross fue diseñado bajo los aportes de francotiradores militares, cazadores y tiradores de elite de largo alcance, con el fin de conseguir un producto que responda no solo al tiro de precisión a largas distancias, sino también a una cacería extrema en el campo. Cuenta con material ajustable y plegable mediante el uso de un botón, lo cual lo transforma en un fusil muy fácil de portar y trasladar. Además, es de por sí extremadamente ligero, ya que con el cargador puesto no pesa más de 2.94 kg, lo cual es 40% menos que los rifles de chasis tradicionales. Incluye también la posibilidad de intercambiar barriles y el que incluye es de acero inoxidable. Su capacidad es de 5 rondas con un cargador de polímero AICS y su gatillo es ajustable en 2 etapas. Finalmente, cabe recalcar que es de uso ambidiestro, con guardamanos flotante M-LOK y receptor de aluminio de 1 pieza.'
+        description: 'El Sig Sauer Cross, calibre 308, es un fusil apto para la caza sumamente confiable y con un excelente nivel de precisión. Se trata de un rifle ligero y modular, capaz de adaptarse a cualquier usuario, preferencia y situación.'
     },
     {
         id: '7',
@@ -79,7 +79,7 @@ const products = [
         category: 'Cuchillos',
         img: 'https://www.armeriacanigo.com.ar/wp-content/uploads/13945_1.jpg.webp',
         stock: 20,
-        description: 'La increíble serie Hunter de la conocida marca Trento nos sigue deleitando con estos increíbles modelos. Calidad, presentación y confiabilidad en un solo producto. Presentación en caja de cartón imantada. Incluye Vaina de cordura. Largo de hoja: 10,5 Cm.         Largo total: 22,5 Cm.                -Acero 420 C plus.        Espesor: 4mm.        Mango: Madera'
+        description: 'La increíble serie Hunter de la conocida marca Trento nos sigue deleitando con estos increíbles modelos. Calidad, presentación y confiabilidad en un solo producto. Presentación en caja de cartón imantada. Incluye Vaina de cordura. Largo de hoja: 10,5 Cm. Largo total: 22,5 Cm. Acero 420 C plus. Espesor: 4mm. Mango: Madera'
     },
 
 ]
