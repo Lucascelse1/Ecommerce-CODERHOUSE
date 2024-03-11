@@ -7,11 +7,12 @@ import { useParams } from "react-router-dom"
 const ItemListContainer = ({ greeting }) => {
 
     const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const { categoryId } = useParams()
 
     useEffect(() => {
-
+        setLoading(true)
         const asyncFunction = categoryId ? getProductsByCategory : getProducts
 
         asyncFunction(categoryId)
@@ -21,8 +22,15 @@ const ItemListContainer = ({ greeting }) => {
             .catch(error => {
                 console.log(error)
             })
+            .finally(()=> {
+                setLoading(false)
+            })
+            
     }, [categoryId])
 
+    if(loading) {
+        return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Cargando listado de productos...</h1>
+    }
 
     return (
         <main className="w-full my-4 flex flex-col justify-center items-center font-['Protest_Guerrilla'] tracking-widest">
