@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import ItemCount from "../ItemCount/ItemCount"
 import { Link } from "react-router-dom"
-import { CartContext } from "../../App"
+import { CartContext } from "../../context/CartContext"
 
 
 const ItemDetail = ({ id, name, img, price, stock, category, description }) => {
@@ -10,14 +10,14 @@ const ItemDetail = ({ id, name, img, price, stock, category, description }) => {
     
     const { addItem } = useContext(CartContext)
 
-    const handleOnAdd = (count) => {
+    const handleOnAdd = (quantity) => {
         const obtProductToAdd = {
-            id, name, price, count
+            id, name, price, quantity
         }
         console.log(obtProductToAdd)
-        console.log('agregue al carrito: ', count)
+        console.log('agregue al carrito: ', quantity)
 
-        setQuantity(count)
+        setQuantity(quantity)
 
         addItem(obtProductToAdd)
      }
