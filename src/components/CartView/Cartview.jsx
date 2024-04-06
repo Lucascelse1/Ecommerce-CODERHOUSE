@@ -22,10 +22,11 @@ const CartView = () => {
             {
                 cart.map(prod => {
                     return (
-                        <article className="flex justify-around border p-4 text-2xl" key={prod.id}>
+                        <article className="flex justify-around border rounded-md p-2 text-2xl my-6 items-center" key={prod.id}>
                             <h2>{prod.name}</h2>
+                            <h4>Unidades: {prod.quantity}</h4>
                             <h3>Total: ${total}</h3>
-                            <button onClick={() => removeItem(prod.id)}>Eliminar</button>
+                            <button className="hover:bg-white hover:text-black p-1 rounded-sm" onClick={() => removeItem(prod.id)}>Eliminar</button>
                         </article>
                     )
                 })

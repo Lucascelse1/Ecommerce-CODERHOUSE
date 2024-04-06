@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
-import { getProducts, getProductsByCategory } from "../../asyncMock"
+//import { getProducts, getProductsByCategory } from "../../asyncMock"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
 import { useNotification } from "../../notification/hooks/useNotification"
 
+import { getDocs, collection, query, where } from "firebase/firestore"
+import { db } from "../../services/firebase/firebaseConfig"
 
 const ItemListContainer = ({ greeting }) => {
 
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState()
     const [loading, setLoading] = useState(true)
 
     const { categoryId } = useParams()
@@ -15,8 +17,37 @@ const ItemListContainer = ({ greeting }) => {
     const { showNotification } = useNotification()
 
     useEffect(() => {
-        setLoading(true)
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
+       setLoading(true)
+        
+        const productsCollection = categoryId ? (
+         query(collection(db, 'products'), where('category', '==', categoryId)) 
+        ) : (
+            collection(db, 'products')
+        )
+
+
+        getDocs(productsCollection)
+            .then(QuerySnapshot => {
+                const productsAdapted = QuerySnapshot.docs.map(doc => {
+                    const data = doc.data()
+
+                    return { id: doc.id, ...data }
+                })
+
+                console.log(productsAdapted)
+                setProducts(productsAdapted)
+            })
+            .catch(() => {
+                showNotification('error', 'Error al cargar la lista de productos')
+            })
+            .finally(()=> {
+                setLoading(false)
+            })
+
+            
+
+
+        /*const asyncFunction = categoryId ? getProductsByCategory : getProducts
 
         asyncFunction(categoryId)
             .then(result => {
@@ -27,12 +58,14 @@ const ItemListContainer = ({ greeting }) => {
             })
             .finally(()=> {
                 setLoading(false)
-            })
+            })*/
+
+            
             
     }, [categoryId])
 
     if(loading) {
-        return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Cargando listado de productos...</h1>
+      return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Cargando listado de productos...</h1>
     }
 
     return (
