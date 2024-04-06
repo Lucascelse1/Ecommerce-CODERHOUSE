@@ -6,9 +6,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
 import { NotificationProvider } from './notification/NotificationService'
 import CartView from './components/CartView/Cartview'
+import Checkout from './components/Checkout/Checkout'
+
 
 
 function App() {
+
   return (
     <>
       <BrowserRouter>
@@ -20,6 +23,7 @@ function App() {
               <Route path='/category/:categoryId' element={<ItemListContainer greeting='Productos de la categoria: ' />} />
               <Route path='/item/:itemId' element={<ItemDetailContainer />} />
               <Route path='/cart' element={<CartView/>}/>
+              <Route path='/checkout' element={<Checkout/>}/>
             </Routes>
           </CartProvider>
         </NotificationProvider>

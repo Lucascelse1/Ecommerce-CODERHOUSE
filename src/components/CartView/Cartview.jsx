@@ -16,7 +16,7 @@ const CartView = () => {
     }
 
     return (
-        <article className="font-['Protest_Guerrilla'] text-center text-white">
+        <article className="font-['Protest_Guerrilla'] tracking-widest text-center text-white">
             <h1 className=" text-5xl mb-8">Carro de compras</h1>
             <section className="m-10"> 
             {
