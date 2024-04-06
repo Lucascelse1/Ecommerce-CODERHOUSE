@@ -8,7 +8,7 @@ const CartWidget = () => {
     const { totalQuantity } = useContext(CartContext)
 
     return (    
-        <Link to='/cart' className='w-12 flex cursor-pointer mr-2'> 
+        <Link to='/cart' style={{ opacity: totalQuantity > 0 ? '1' : '0' }} className='w-12 flex cursor-pointer mr-2'> 
             <img src={ cart } alt="cart-widget" />
             <span className='text-center w-full text-4xl text-white'>{ totalQuantity }</span>
         </Link>
