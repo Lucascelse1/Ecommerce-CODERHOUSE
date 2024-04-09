@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-//import { getProducts, getProductsByCategory } from "../../asyncMock"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
 import { useNotification } from "../../notification/hooks/useNotification"
@@ -17,10 +16,10 @@ const ItemListContainer = ({ greeting }) => {
     const { showNotification } = useNotification()
 
     useEffect(() => {
-       setLoading(true)
-        
+        setLoading(true)
+
         const productsCollection = categoryId ? (
-         query(collection(db, 'products'), where('category', '==', categoryId)) 
+            query(collection(db, 'products'), where('category', '==', categoryId))
         ) : (
             collection(db, 'products')
         )
@@ -40,32 +39,16 @@ const ItemListContainer = ({ greeting }) => {
             .catch(() => {
                 showNotification('error', 'Error al cargar la lista de productos')
             })
-            .finally(()=> {
+            .finally(() => {
                 setLoading(false)
             })
 
-            
 
 
-        /*const asyncFunction = categoryId ? getProductsByCategory : getProducts
+    }, [categoryId, showNotification])
 
-        asyncFunction(categoryId)
-            .then(result => {
-                setProducts(result)
-            })
-            .catch(() => {
-                showNotification('error', 'Error al cargar la lista de productos')
-            })
-            .finally(()=> {
-                setLoading(false)
-            })*/
-
-            
-            
-    }, [categoryId])
-
-    if(loading) {
-      return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Cargando listado de productos...</h1>
+    if (loading) {
+        return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Cargando listado de productos...</h1>
     }
 
     return (
@@ -73,10 +56,10 @@ const ItemListContainer = ({ greeting }) => {
 
             <h1 className="text-center text-white text-4xl font-body p-4"> {greeting} </h1>
 
-            
+
             <ItemList products={products} />
-            
-            
+
+
         </main>
     )
 }
