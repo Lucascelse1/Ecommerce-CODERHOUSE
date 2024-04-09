@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
 import { useNotification } from "../../notification/hooks/useNotification"
-
 import { getDocs, collection, query, where } from "firebase/firestore"
 import { db } from "../../services/firebase/firebaseConfig"
 
