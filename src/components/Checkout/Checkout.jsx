@@ -1,87 +1,69 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { CartContext } from "../../context/CartContext"
-import { collection, documentId, where, query, getDocs, writeBatch, addDoc } from "firebase/firestore"
+import { collection, where, query, getDocs, writeBatch, addDoc } from "firebase/firestore"
 import { db } from "../../services/firebase/firebaseConfig"
+import FormCheckout from "../FormCheckout/FormCheckout"
+
 
 
 const Checkout = () => {
-
     const { cart, total } = useContext(CartContext)
+    const [orderId, setOrderId] = useState(null)
+    const [loading, setLoading] = useState(false)
 
-    /* const[name, setName] = useState('')
-    const[email, setEmail] = useState('')
-    const[telephone, setTelephone] = useState('') */
-
-    const createOrder = async (userData) => {
-
+    const createOrder = async ({ name, phone, email }) => {
+        setLoading(true)
         try {
             const objOrder = {
-                buyer: {
-                    name: 'Elfo',
-                    email: 'elfo@elfo.elfo',
-                    phone: '123123123'
-                },
+                buyer: { name, phone, email },
                 items: cart,
                 total
-            }
+            };
 
             const batch = writeBatch(db)
-            const outOffStock = []
+            const outOfStock = []
             const ids = cart.map(prod => prod.id)
-
-            const productsCollection = query(collection(db, 'products'), where(documentId(), 'in', ids))
-
-            /* getDocs(productsCollection)
-                .then(QuerySnapshot => console.log(QuerySnapshot.docs)) */
-
-            const QuerySnapshot = await getDocs(productsCollection)
-
-            const { docs } = QuerySnapshot
-
-            docs.forEach(doc => {
+            const productsCollection = query(collection(db, 'products'), where('id', 'in', ids))
+            const querySnapshot = await getDocs(productsCollection)
+            querySnapshot.forEach(doc => {
                 const data = doc.data()
-                const stockDb = data.stock
-
                 const productsAddedToCart = cart.find(prod => prod.id === doc.id)
                 const prodQuantity = productsAddedToCart.quantity
-
-                if (stockDb >= prodQuantity) {
-                    batch.update(doc.ref, { stock: stockDb - prodQuantity })
+                if (data.stock >= prodQuantity) {
+                    batch.update(doc.ref, { stock: data.stock - prodQuantity })
                 } else {
-                    outOffStock.push({ id: doc.id, ...data })
+                    outOfStock.push({ id: doc.id, ...data })
                 }
             })
 
-            if (outOffStock.length === 0) {
-                batch.commit() //ejecuta todas las acciones que hay dentro de la caja
-
+            if (outOfStock.length === 0) {
+                await batch.commit()
                 const orderCollection = collection(db, 'orders')
-                const { id } = await addDoc(orderCollection, objOrder)
-
-                console.log(id)
+                const addedOrderRef = await addDoc(orderCollection, objOrder)
+                setOrderId(addedOrderRef.id)// Actualizamos el estado con el ID de la orden
+                console.log(addedOrderRef.id)
             } else {
                 console.error('Hay productos que no tienen stock disponible')
             }
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false)
         }
-        catch (error) {
-            console.error('Hubo un error en la generacion de la orden')
-        }
-
     }
 
+    if (loading) {
+        return <h2 className="text-white text-3xl">Se está generando su orden...</h2>
+    }
+
+    if (orderId) {
+        return <h2 className="text-white text-3xl">El ID de su orden es: {orderId}</h2>
+    }
 
     return (
         <div className="text-white font-['Protest_Guerrilla'] tracking-widest flex flex-col items-center">
             <h1 className="text-6xl my-12">Checkout</h1>
-            <form className="flex flex-col w-64 border p-4 gap-y-4" action="">
-                <label htmlFor="">Nombre y Apellido</label>
-                <input type="text" />
-                <label htmlFor="">Email</label>
-                <input type="mail" />
-                <label htmlFor="">Telefono</label>
-                <input type="number" />
-            </form>
-            <button className="tracking-widest my-8 border p-2 rounded-lg" onClick={createOrder}>Generar orden de compra <br />(generando la orden de compra en firebase)</button>
+            <FormCheckout onConfirm={createOrder} />
         </div>
     )
 }
