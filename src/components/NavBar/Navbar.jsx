@@ -34,7 +34,7 @@ const Navbar = () => {
 
                 {
                     categories.map(cat => {
-                        return <Link className='w-1/3 flex justify-center tracking-[.3rem]' key={cat.id} to={`/category/${cat.slug}`}>{cat.name}</Link>
+                        return <Link className='w-1/3 uppercase text-lg flex justify-center tracking-[.3rem]' key={cat.id} to={`/category/${cat.slug}`}>{cat.name}</Link>
                     })
                 }
 

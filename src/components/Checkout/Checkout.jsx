@@ -2,12 +2,13 @@ import { useContext, useState } from "react"
 import { CartContext } from "../../context/CartContext"
 import { collection, where, query, getDocs, writeBatch, addDoc } from "firebase/firestore"
 import { db } from "../../services/firebase/firebaseConfig"
+import { Link } from "react-router-dom"
 import FormCheckout from "../FormCheckout/FormCheckout"
 
 
 
 const Checkout = () => {
-    const { cart, total } = useContext(CartContext)
+    const { cart, total, clearCart } = useContext(CartContext)
     const [orderId, setOrderId] = useState(null)
     const [loading, setLoading] = useState(false)
 
@@ -40,8 +41,12 @@ const Checkout = () => {
                 await batch.commit()
                 const orderCollection = collection(db, 'orders')
                 const addedOrderRef = await addDoc(orderCollection, objOrder)
+                
                 setOrderId(addedOrderRef.id)// Actualizamos el estado con el ID de la orden
                 console.log(addedOrderRef.id)
+
+                clearCart()
+
             } else {
                 console.error('Hay productos que no tienen stock disponible')
             }
@@ -53,11 +58,17 @@ const Checkout = () => {
     }
 
     if (loading) {
-        return <h2 className="text-white text-3xl">Se está generando su orden...</h2>
+        return <h2 className="text-white text-3xl text-center mt-10 font-['Protest_Guerrilla'] tracking-widest">Se está generando su orden...</h2>
     }
 
     if (orderId) {
-        return <h2 className="text-white text-3xl">El ID de su orden es: {orderId}</h2>
+        return (
+            <div className="w-full flex flex-col items-center">
+                <h2 className="text-white text-3xl text-center mt-10 font-['Protest_Guerrilla'] tracking-widest">El ID de su orden es: {orderId} <br /> Muchas gracias por su compra! </h2>
+                <Link className="text-white mt-14 text-xl uppercase font-['Protest_Guerrilla'] tracking-widest rounded-lg border p-2" to='/'>volver al inicio</Link>
+            </div>
+            
+        )
     }
 
     return (
