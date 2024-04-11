@@ -1,34 +1,24 @@
-import { useEffect, useState } from "react"
-/* import { getProductsById } from "../../asyncMock" */
+import { useAsycn } from "../../hooks/useAsync"
+import { getProductsById } from "../../services/firebase/firestore/products"
 import ItemDetail from "../ItemDetail/ItemDetail"
 import { useParams } from "react-router-dom"
-import { getDoc, doc, } from "firebase/firestore"
-import { db } from "../../services/firebase/firebaseConfig"
+
 
 const ItemDetailContainer = () => {
 
-    const [product, setProduct] = useState(null)
-
     const { itemId } = useParams()
 
-    useEffect(() => {
+    const getDoc = () => getProductsById(itemId)
 
-        const productDoc = doc(db, 'products', itemId)
+    const { data: product, loading, error } = useAsycn(getDoc, [itemId])
 
-        getDoc(productDoc)
-            .then(QueryDocumentSnapshot => {
-                const data = QueryDocumentSnapshot.data()
-                const productAdapted = {id: QueryDocumentSnapshot.id, ...data}
+    if(loading) {
+        return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Cargando producto...</h1>
+    }
 
-                setProduct(productAdapted)
-            })
-            .catch()
-
-        /* getProductsById(itemId)
-            .then(result => {
-                setProduct(result)
-            }) */
-    }, [itemId])
+    if(error) {
+        return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Error al obtener el prodcuto.</h1>
+    }
 
     return (
         <main className="w-full flex flex-col justify-center items-center gap-y-2 font-['Protest_Guerrilla']">

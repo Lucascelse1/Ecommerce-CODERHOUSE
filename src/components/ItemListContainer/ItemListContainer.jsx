@@ -1,53 +1,24 @@
-import { useEffect, useState } from "react"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
-import { useNotification } from "../../notification/hooks/useNotification"
-import { getDocs, collection, query, where } from "firebase/firestore"
-import { db } from "../../services/firebase/firebaseConfig"
+import { getProducts } from "../../services/firebase/firestore/products"
+import { useAsycn } from "../../hooks/useAsync"
+
 
 const ItemListContainer = ({ greeting }) => {
 
-    const [products, setProducts] = useState()
-    const [loading, setLoading] = useState(true)
-
     const { categoryId } = useParams()
 
-    const { showNotification } = useNotification()
+    const getData = () => getProducts(categoryId)
+        
 
-    useEffect(() => {
-        setLoading(true)
-
-        const productsCollection = categoryId ? (
-            query(collection(db, 'products'), where('category', '==', categoryId))
-        ) : (
-            collection(db, 'products')
-        )
-
-
-        getDocs(productsCollection)
-            .then(QuerySnapshot => {
-                const productsAdapted = QuerySnapshot.docs.map(doc => {
-                    const data = doc.data()
-
-                    return { id: doc.id, ...data }
-                })
-
-                console.log(productsAdapted)
-                setProducts(productsAdapted)
-            })
-            .catch(() => {
-                showNotification('error', 'Error al cargar la lista de productos')
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-
-
-
-    }, [categoryId, showNotification])
+    const { data: products, loading, error } = useAsycn(getData, [categoryId])
 
     if (loading) {
         return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Cargando listado de productos...</h1>
+    }
+
+    if (error) {
+        return <h1 className="text-center text-white text-3xl font-['Protest_Guerrilla'] tracking-widest">Hubo un error en la carga de productos.</h1>
     }
 
     return (
