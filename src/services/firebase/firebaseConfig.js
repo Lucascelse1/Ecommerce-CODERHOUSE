@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDxCfH6sHLULkBUy9Mxo_g_j-I8eXTnFF4",
-  authDomain: "ecommerce-pirinola.firebaseapp.com",
-  projectId: "ecommerce-pirinola",
-  storageBucket: "ecommerce-pirinola.appspot.com",
-  messagingSenderId: "961671050193",
-  appId: "1:961671050193:web:2dd04f8d8b93493bb4a6f0"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId
 };
 
 // Initialize Firebase
