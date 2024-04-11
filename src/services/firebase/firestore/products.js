@@ -1,5 +1,6 @@
 import { getDocs, collection, query, where, doc, getDoc } from "firebase/firestore"
 import { db } from "../firebaseConfig"
+import { createProductAdaptedFromFirestore } from "../../../adapters/createProductAdaptedFromFirestore"
 
 export const getProducts = (categoryId) => {
     const productsCollection = categoryId ? (
@@ -12,9 +13,7 @@ export const getProducts = (categoryId) => {
     return getDocs(productsCollection)
         .then(QuerySnapshot => {
             const productsAdapted = QuerySnapshot.docs.map(doc => {
-                const data = doc.data()
-
-                return { id: doc.id, ...data }
+                return createProductAdaptedFromFirestore(doc)
             })
 
             console.log(productsAdapted)
@@ -31,8 +30,7 @@ export const getProductsById = (itemId) => {
 
         return getDoc(productDoc)
             .then(QueryDocumentSnapshot => {
-                const data = QueryDocumentSnapshot.data()
-                const productAdapted = {id: QueryDocumentSnapshot.id, ...data}
+                const productAdapted = createProductAdaptedFromFirestore(QueryDocumentSnapshot)
 
                 return productAdapted
             })

@@ -7,7 +7,7 @@ const FormCheckout = ({ onConfirm }) => {
 
     const handleConfirm = (event) => {
         event.preventDefault()
-
+        
         const userData = {
             name, phone, email
         }
@@ -18,7 +18,7 @@ const FormCheckout = ({ onConfirm }) => {
     return (
         <form className="border p-6 rounded-lg" onSubmit={handleConfirm}>
             <label className="flex flex-col text-4xl gap-y-4" htmlFor="">Nombre
-                <input
+                <input required
                     className="text-black"
                     type="text"
                     value={name}
@@ -27,7 +27,7 @@ const FormCheckout = ({ onConfirm }) => {
             </label>
             <label className="flex flex-col text-4xl gap-y-4 mt-4" htmlFor="">
                 Telefono
-                <input
+                <input required
                     className="text-black"
                     type="number"
                     value={phone}
@@ -35,7 +35,7 @@ const FormCheckout = ({ onConfirm }) => {
                 />
             </label>
             <label className="flex flex-col text-4xl gap-y-4 mt-4" htmlFor="">Email
-                <input
+                <input required
                     className="text-black"
                     type="email"
                     value={email}
