@@ -64,7 +64,7 @@ const Checkout = () => {
     if (orderId) {
         return (
             <div className="w-full flex flex-col items-center">
-                <h2 className="text-white text-3xl text-center mt-10 font-['Protest_Guerrilla'] tracking-widest">El ID de su orden es: {orderId} <br /> Muchas gracias por su compra! </h2>
+                <h2 className="text-white bg-[#51616d] p-4 text-3xl text-center mt-10 font-['Protest_Guerrilla'] rounded-lg">El ID de su orden es: {orderId} <br /> Muchas gracias por su compra! </h2>
                 <Link className="text-white mt-14 text-xl uppercase font-['Protest_Guerrilla'] tracking-widest rounded-lg border p-2" to='/'>volver al inicio</Link>
             </div>
             
